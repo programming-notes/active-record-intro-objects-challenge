@@ -99,3 +99,5 @@ From within the console run ...
 ### Release 2: Edit Records in `ratings` Table
 
 We've been working with the `Dog` class.  For this challenge, the seeds file has also seeded the database with data in the `ratings` table.  The records in the table need to be edited.  Some tests have been provided to guide you through the process.  Working in the console, edit the records in the `ratings` table until all the tests pass.  Then, submit this challenge.
+
+***Note:***  The tests provided to guide you through updating the records in the database are not tests that you would normally write.  They are written only to provide guidance for this challenge.  Don't mimic them.
