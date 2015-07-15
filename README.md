@@ -32,17 +32,19 @@ bundle exec rake console
 
 We're going to work with our `Dog` class from within the Rake console.  Let's begin by opening the console (see Figure 3).  Once it's open, we can begin interacting with our models.  As we work through each release, we should execute the provided example code ourselves and look at the return values.
 
-### Release 0: Getter and Setter Methods
 
-Use the provided Rake task to open the console:  `bundle exec rake console`.
+### Release 0: Dog Attributes
+```ruby
+Dog
+```
+*Figure 4*. Returning the `Dog` class.
 
-From within the console run ...
+Running the code in Figure 4 will return the `Dog` class itself, and we will see displayed in parentheses a list of attribute names and types that are associated with the class.  From where does Active Record build this list of attributes?
 
--  `Dog`
+Active Record derives these attributes from the columns in the dogs table in our database.  Every column in the database is considered an attribute.  So, our dogs have a name attribute, a license attribute, a breed attribute, etc.  These attributes are similar to the instance variables that we assign to our plain Ruby objects.
 
-  This will return the `Dog` class, and we will see in parentheses a list of attribute names and types that are associated with instances of `Dog`.   
-  
-  Active Record derives these attributes from the columns in the `dogs` table in our database.  And for every column in the database, Active Record provides getter and setter instance methods.
+
+And for every column in the database, Active Record provides getter and setter instance methods.
 
 
 - `tenley = Dog.find_by(name: "Tenley")`
