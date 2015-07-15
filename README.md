@@ -71,7 +71,7 @@ When we assign an instance variable in our plain Ruby objects, we often provide 
 
 With an Active Record model, getter and setter methods are provided automatically.  There's no need to create them ourselves.  For every column in the database, Active Record provides getter and setter instance methods.
 
-```
+```ruby
 tenley = Dog.find_by(name: "Tenley")
 
 tenley.name
@@ -98,25 +98,43 @@ Going through Figure 6 in more detail, after we have our dog object assigned to 
 In addition to getter methods, we also get setter methods.  Given an instance of `Dog`, we can *set* the value of any of its attributes.  In this case, we're changing the age of our dog to 2.  And after setting the new age, when we again get the age, we see that Tenley's age is now 2.
 
 
-- `tenley = Dog.find_by(name: "Tenley")`
+### Release 2: Persisting Attribute Changes
+```ruby
+jayda = Dog.find_by(name: "Jayda")
 
-  Here we're reassigning the variable `tenley` the value of fresh database query.  You'll notice that the value of `age` is `1`.
+jayda.age
+# => 3
+
+jayda.age = 4
+# => 4
+
+jayda.age
+# => 4
+
+Dog.find_by(name: "Jayda").age
+# => 3
+```
+*Figure 7*.  Changing the age of a dog, but not updating the database.
+
+In Figure 7, we retrieve the data for the dog named Jayda.  We then proceed to update the Jayda's age, increasing it from 3 to 4.  However, when we retrieve the data for Jayda from the database a second time, Jayda's age is still 3.
+
+When we set an object's attributes using setter methods, those changes are only applied to the in-memory Ruby object.  Those changes are not automatically persisted in the database.
+
+
+```ruby
+jayda.save
+
+Dog.find_by(name: "Jayda").age
+# => 4
+```
+*Figure 8*.  Saving a dog to persist changes to its attributes.
+
+If we want to persist our change to Jayda's age, we need to call the `#save` method on the dog object.
   
-  This is because we've only updated the Ruby object.  In order to have persisted the change in age to the database, we would have needed to call `#save` on the `tenley` object.
-
-- `tenley.age = 2`
-
-  Again, changing the value of the Ruby object's `age` attribute.
-
-- `tenley.save`
-
-  Attempting to update the record in the database.
+Because our `jayda` object already has an id, Active Record will not make an SQL `INSERT` query.  Instead, our call to `#save` will result in executing an `UPDATE` query like `UPDATE "dogs" SET "age" = ?, "updated_at" = ? WHERE "dogs"."id" = ?  [["age", 4], ["updated_at", "2015-07-15 18:57:41.762752"], ["id", 2]]`.
   
-  Because the `tenley` object already has an `id` set, Active Record will not make in SQL `INSERT` query.  Instead, it will make an `UPDATE` query:
-  
-  `UPDATE "dogs" SET "age" = ?, "updated_at" = ? WHERE "dogs"."id" = 1  [["age", 2], ["updated_at", "2014-09-08 20:26:06.781373"]]`
-  
-  We've only changed the `age` attribute, but Active Record also updates the `updated_at` attribute.  Active Record will handle working with the `created_at` and `updated_at` fields on its own.  We don't need to worry about them.
+We've only changed the `age` attribute, but Active Record also updates the `updated_at` attribute.  Active Record will handle working with the `created_at` and `updated_at` fields on its own.  We don't need to worry about them.
+
 
 ### Release 1: Updating and Deleting Methods
 
