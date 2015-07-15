@@ -145,15 +145,17 @@ tenley.license
 Sometimes we wan't to update multiple attributes at the same time.  If we wanted, we could use an object's individual setter methods one at a time.  However, Active Record provides methods for updating multiple attributes at one time (see Figure 9).
 
 `#assign_attributes` and `#update_attributes` both allow us to update the values of multiple attributes at one time.  Can we guess the difference between them?  One of the methods persists changes to the database while the other only updates the attributes of the in-memory Ruby object.  Which one is which?
- 
 
-- `rabid_dog = Dog.create()`
 
-  We now have a new instance of `Dog` and have assigned it to the variable `rabid_dog`.
-  
-- `rabid_dog.destroy`
+### Release 4: Removing Records from the Database
+```ruby
+rabid_dog = Dog.create(name: "Old Yeller", age: 5, breed: "Black Mouth Cur")
+rabid_dog.destroy
+```
+*Figure 10*. Inserting and then removing a record from the database.
 
-  `#destroy` is an instance method that deletes a record from the database.  The SQL executed was `DELETE FROM "dogs" WHERE "dogs"."id" = ?  [["id", 4]]`.
+Sometimes we want to remove a record from our database.  Given a dog object, we can remove its data from the database with the `#destroy` method (see Figure 10).  When we call `#destroy` Active Record generates and execute a `DELETE` SQL query like `DELETE FROM "dogs" WHERE "dogs"."id" = ?  [["id", 4]]`.
+
 
 ### Release 2: Edit Records in `ratings` Table
 
