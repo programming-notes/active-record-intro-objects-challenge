@@ -55,13 +55,10 @@ class Book
 end
 
 book = Book.new(title: "The Cat in the Hat")
-
 book.title
 # => "The Cat in the Hat"
-
 book.title = "Green Eggs and Ham"
 # => "Green Eggs and Ham"
-
 book.title
 # => "Green Eggs and Ham"
 ```
@@ -73,19 +70,14 @@ With an Active Record model, getter and setter methods are provided automaticall
 
 ```ruby
 tenley = Dog.find_by(name: "Tenley")
-
 tenley.name
 # => "Tenley"
-
 tenley.breed
 # => "Golden Doodle"
-
 tenley.age
 # => 1
-
 tenley.age = 2
 # => 2
-
 tenley.age
 # => 2
 ```
@@ -101,13 +93,10 @@ In addition to getter methods, we also get setter methods.  Given an instance of
 ### Release 2: Persisting Attribute Changes
 ```ruby
 jayda = Dog.find_by(name: "Jayda")
-
 jayda.age
 # => 3
-
 jayda.age = 4
 # => 4
-
 jayda.age
 # => 4
 
