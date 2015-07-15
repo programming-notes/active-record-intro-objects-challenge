@@ -119,21 +119,33 @@ Dog.find_by(name: "Jayda").age
 *Figure 8*.  Saving a dog to persist changes to its attributes.
 
 If we want to persist our change to Jayda's age, we need to call the `#save` method on the dog object.
-  
+
 Because our `jayda` object already has an id, Active Record will not make an SQL `INSERT` query.  Instead, our call to `#save` will result in executing an `UPDATE` query like `UPDATE "dogs" SET "age" = ?, "updated_at" = ? WHERE "dogs"."id" = ?  [["age", 4], ["updated_at", "2015-07-15 18:57:41.762752"], ["id", 2]]`.
   
 We've only changed the `age` attribute, but Active Record also updates the `updated_at` attribute.  Active Record will handle working with the `created_at` and `updated_at` fields on its own.  We don't need to worry about them.
 
 
-### Release 1: Updating and Deleting Methods
+### Release 3: Updating Multiple Attributes
+```ruby
+tenley = Dog.find_by(name: "Tenley")
+tenley.age
+# => 1
+tenley.license
+# => "OH-9384764"
 
-- `tenley.update_attributes(age: 3, license: "OH-9876543")`
+tenley.assign_attributes(age: 3, license: "OH-1234567")
 
-  `#update_attributes` is an instance method that allows us to set multiple attributes at the same time.  The attributes are updated in the Ruby object and also saved to the database.  Take a look at the console output to see the SQL `UPDATE` query.
-  
-- `tenley`
+tenley.age
+# => 3
+tenley.license
+# => "OH-1234567"
+```
+*Figure 9* Simultaneously updating a dog's age and license.
 
-  We can see that the `age` and `license` attributes have been updated in the Ruby object.
+Sometimes we wan't to update multiple attributes at the same time.  If we wanted, we could use an object's individual setter methods one at a time.  However, Active Record provides methods for updating multiple attributes at one time (see Figure 9).
+
+`#assign_attributes` and `#update_attributes` both allow us to update the values of multiple attributes at one time.  Can we guess the difference between them?  One of the methods persists changes to the database while the other only updates the attributes of the in-memory Ruby object.  Which one is which?
+ 
 
 - `rabid_dog = Dog.create()`
 
