@@ -44,28 +44,59 @@ Running the code in Figure 4 will return the `Dog` class itself, and we will see
 Active Record derives these attributes from the columns in the dogs table in our database.  Every column in the database is considered an attribute.  So, our dogs have a name attribute, a license attribute, a breed attribute, etc.  These attributes are similar to the instance variables that we assign to our plain Ruby objects.
 
 
-And for every column in the database, Active Record provides getter and setter instance methods.
+### Release 1: Getter and Setter Methods
+```ruby
+class Book
+  attr_accessor :title
+  
+  def initialize(args)
+    @title = args[:title]
+  end
+end
 
+book = Book.new(title: "The Cat in the Hat")
 
-- `tenley = Dog.find_by(name: "Tenley")`
+book.title
+# => "The Cat in the Hat"
 
-  We've now assigned the variable `tenley` the value of an instance of the `Dog` class.  We'll use `tenley` to explore the getter and setter methods.
+book.title = "Green Eggs and Ham"
+# => "Green Eggs and Ham"
 
-- `tenley.name`
+book.title
+# => "Green Eggs and Ham"
+```
+*Figure 5*. A plain Ruby object with getter and setter methods for the title.
 
-  As stated earlier, Active Record provides us with getter and setter methods for all of the object's attributes.  In this case, we're calling the `#name` instance method to *get* the value of the `name` attribute.  The value of the attribute is `"Tenley"`.
+When we assign an instance variable in our plain Ruby objects, we often provide methods for getting the value of the instance variable and also setting the value of the instance variable (see Figure 5).  We might be more familiar with referring to these methods as reader and writer methods.
 
-- `tenley.breed`
+With an Active Record model, getter and setter methods are provided automatically.  There's no need to create them ourselves.  For every column in the database, Active Record provides getter and setter instance methods.
 
-  As with the `name` attribute, we can also get the value of the `breed` attribute—and the value of any other column in the database.
+```
+tenley = Dog.find_by(name: "Tenley")
 
-- `tenley.age = 2`
+tenley.name
+# => "Tenley"
 
-  In addition to getter methods, we also get setter methods.  Given an instance of `Dog`, we can *set* the value of any of its attributes.  In this case, we're changing the age of the `tenley` object to `2`.
+tenley.breed
+# => "Golden Doodle"
 
-- `tenley`
+tenley.age
+# => 1
 
-  Inspecting the current status of the `tenley` object, we can see that its `age` is now `2`.
+tenley.age = 2
+# => 2
+
+tenley.age
+# => 2
+```
+*Figure 6*. Using the getter and setter methods of an Active Record model.
+
+In Figure 6, we're accessing the attributes of our Active Record `Dog` model; we get the values of the name, breed, and age attributes, and we set the value of the age attribute.  As stated earlier, Active Record provides us with getter and setter methods for all of the object's attributes.  Our `Dog` class is empty; we haven't defined any of these methods.
+
+Going through Figure 6 in more detail, after we have our dog object assigned to the variable `tenley`, we're calling the `#name` instance method to *get* the value of the name attribute.  The value of the name attribute is returned:  the string `"Tenley"`.  As with the name attribute, we're also able to get the value of the breed and age attributes—and would be able to get the value of any other column in the database.
+
+In addition to getter methods, we also get setter methods.  Given an instance of `Dog`, we can *set* the value of any of its attributes.  In this case, we're changing the age of our dog to 2.  And after setting the new age, when we again get the age, we see that Tenley's age is now 2.
+
 
 - `tenley = Dog.find_by(name: "Tenley")`
 
