@@ -172,3 +172,9 @@ This is a list of changes that we need to make.  We need to be sure that all cha
 
 - Judge 2 rated Dog 2, but the cuteness and coolness scored were reversed. Coolness was entered as a 10, and cuteness was entered as an 8.  These need to be reversed.  Find the rating for Judge 2 and Dog 2 and update the cuteness and coolness ratings.
 
+
+### Conclusion
+In this challenge, we've discussed Active Record model attributes, which are more or less the values in the database.  These attributes are the state of our objects—similar to instance variables in our plain Ruby objects.  We've explored both how to get and set these values using the Active Record generated getter and setter methods as well as other methods (e.g., `#update_attributes`).  Most of the behaviors for Active Record models is centered around their attributes, so we need to be sure we understand how columns in a database table translate to behaviors in our objects.
+
+We've previously looked at how to create new records in the database and read records from the database.  In this challenge, we've now addressed updating and deleting records in our database.  Create, read, update, and delete (CRUD).  These are the four basic functions for persisting data in a database, and they will form the backbone of our applications as we move forward through Dev Bootcamp.  While these might still be somewhat new to us, we'll continue to build familiarity with them.
+
