@@ -105,7 +105,7 @@ Dog.find_by(name: "Jayda").age
 ```
 *Figure 7*.  Changing the age of a dog, but not updating the database.
 
-In Figure 7, we retrieve the data for the dog named Jayda.  We then proceed to update the Jayda's age, increasing it from 3 to 4.  However, when we retrieve the data for Jayda from the database a second time, Jayda's age is still 3.
+In Figure 7, we retrieve the data for the dog named Jayda.  We then proceed to update Jayda's age, increasing it from 3 to 4.  However, when we retrieve the data for Jayda from the database a second time, Jayda's age is still 3.
 
 When we set an object's attributes using setter methods, those changes are only applied to the in-memory Ruby object.  Those changes are not automatically persisted in the database.
 
@@ -118,7 +118,7 @@ Dog.find_by(name: "Jayda").age
 ```
 *Figure 8*.  Saving a dog to persist changes to its attributes.
 
-If we want to persist our change to Jayda's age, we need to call the `#save` method on the dog object.
+If we want to persist our change to Jayda's age, we need to call the `#save` method on the dog object (see Figure 8).
 
 Because our `jayda` object already has an id, Active Record will not make an SQL `INSERT` query.  Instead, our call to `#save` will result in executing an `UPDATE` query like `UPDATE "dogs" SET "age" = ?, "updated_at" = ? WHERE "dogs"."id" = ?  [["age", 4], ["updated_at", "2015-07-15 18:57:41.762752"], ["id", 2]]`.
   
@@ -154,7 +154,7 @@ rabid_dog.destroy
 ```
 *Figure 10*. Inserting and then removing a record from the database.
 
-Sometimes we want to remove a record from our database.  Given a dog object, we can remove its data from the database with the `#destroy` method (see Figure 10).  When we call `#destroy` Active Record generates and execute a `DELETE` SQL query like `DELETE FROM "dogs" WHERE "dogs"."id" = ?  [["id", 4]]`.
+Sometimes we want to remove a record from our database.  Given a dog object, we can remove its data from the database with the `#destroy` method (see Figure 10).  When we call `#destroy` Active Record generates and executes a `DELETE` SQL query like `DELETE FROM "dogs" WHERE "dogs"."id" = ?  [["id", 4]]`.
 
 
 ### Release 5: Update Ratings Data
@@ -162,7 +162,7 @@ In this release, we're going to work with ratings. The seeds file was set up to 
 
 This is a list of changes that we need to make.  We need to be sure that all changes are persisted in the database.
 
-- Judge 1 rated Dog 2's cuteness to be a 7.  The cuteness rating was mistakenly entered into the database as 6.  Find the record where Judge 1 rated Dog 2, and update cuteness to be a 7.
+- Judge 1 rated Dog 2's cuteness to be a 7.  The cuteness rating was mistakenly entered into the database as a 6.  Find the record where Judge 1 rated Dog 2, and update cuteness to be a 7.
 
 - Judge 5 was found to be taking bribes.  All ratings made by Judge 5 need to be removed from the database.  Find and delete all ratings made by Judge 5.
 
@@ -170,11 +170,11 @@ This is a list of changes that we need to make.  We need to be sure that all cha
 
 - Judge 4 was recorded as having rated Dog 3 a 7 on coolness and a 4 on cuteness.  The judge's id was recorded incorrectly; it was Judge 6 who made this rating.  Find the record where Judge 4 rated Dog 3 and update the judge id to be a 6.
 
-- Judge 2 rated Dog 2, but the cuteness and coolness scored were reversed. Coolness was entered as a 10, and cuteness was entered as an 8.  These need to be reversed.  Find the rating for Judge 2 and Dog 2 and update the cuteness and coolness ratings.
+- Judge 2 rated Dog 2, but the cuteness and coolness scores were reversed. Coolness was entered as a 10, and cuteness was entered as an 8.  These need to be reversed.  Find the rating for Judge 2 and Dog 2 and update the cuteness and coolness ratings.
 
 
 ### Conclusion
-In this challenge, we've discussed Active Record model attributes, which are more or less the values in the database.  These attributes are the state of our objects—similar to instance variables in our plain Ruby objects.  We've explored both how to get and set these values using the Active Record generated getter and setter methods as well as other methods (e.g., `#update_attributes`).  Most of the behaviors for Active Record models is centered around their attributes, so we need to be sure we understand how columns in a database table translate to behaviors in our objects.
+In this challenge, we've discussed Active Record model attributes, which are more or less the values in the database.  These attributes are the state of our objects—similar to instance variables in our plain Ruby objects.  We've explored both how to get and set these values using the Active Record-generated getter and setter methods as well as other methods (e.g., `#update_attributes`).  Most of the behaviors for Active Record models are centered around their attributes, so we need to be sure we understand how columns in a database table translate to behaviors in our objects.
 
 We've previously looked at how to create new records in the database and read records from the database.  In this challenge, we've now addressed updating and deleting records in our database.  Create, read, update, and delete (CRUD).  These are the four basic functions for persisting data in a database, and they will form the backbone of our applications as we move forward through Dev Bootcamp.  While these might still be somewhat new to us, we'll continue to build familiarity with them.
 
