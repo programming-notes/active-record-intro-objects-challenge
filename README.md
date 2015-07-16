@@ -157,8 +157,18 @@ rabid_dog.destroy
 Sometimes we want to remove a record from our database.  Given a dog object, we can remove its data from the database with the `#destroy` method (see Figure 10).  When we call `#destroy` Active Record generates and execute a `DELETE` SQL query like `DELETE FROM "dogs" WHERE "dogs"."id" = ?  [["id", 4]]`.
 
 
-### Release 2: Edit Records in `ratings` Table
+### Release 5: Update Ratings Data
+In this release, we're going to work with ratings. The seeds file was set up to seed the database with a handful of ratings.  We're going to update the data in the database.
 
-We've been working with the `Dog` class.  For this challenge, the seeds file has also seeded the database with data in the `ratings` table.  The records in the table need to be edited.  Some tests have been provided to guide you through the process.  Working in the console, edit the records in the `ratings` table until all the tests pass.  Then, submit this challenge.
+This is a list of changes that we need to make.  We need to be sure that all changes are persisted in the database.
 
-***Note:***  The tests provided to guide you through updating the records in the database are not tests that you would normally write.  They are written only to provide guidance for this challenge.  Don't mimic them.
+- Judge 1 rated Dog 2's cuteness to be a 7.  The cuteness rating was mistakenly entered into the database as 6.  Find the record where Judge 1 rated Dog 2, and update cuteness to be a 7.
+
+- Judge 5 was found to be taking bribes.  All ratings made by Judge 5 need to be removed from the database.  Find and delete all ratings made by Judge 5.
+
+- Dog 1 is the cutest dog in the entire world and should always receive a cuteness score of 10.  Find any rating for Dog 1 where cuteness is not a 10 and update cuteness to be a 10.
+
+- Judge 4 was recorded as having rated Dog 3 a 7 on coolness and a 4 on cuteness.  The judge's id was recorded incorrectly; it was Judge 6 who made this rating.  Find the record where Judge 4 rated Dog 3 and update the judge id to be a 6.
+
+- Judge 2 rated Dog 2, but the cuteness and coolness scored were reversed. Coolness was entered as a 10, and cuteness was entered as an 8.  These need to be reversed.  Find the rating for Judge 2 and Dog 2 and update the cuteness and coolness ratings.
+
