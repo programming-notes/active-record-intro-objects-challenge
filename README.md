@@ -87,7 +87,7 @@ In Figure 6, we're accessing the attributes of our Active Record `Dog` model; we
 
 Going through Figure 6 in more detail, after we have our dog object assigned to the variable `tenley`, we're calling the `#name` instance method to *get* the value of the name attribute.  The value of the name attribute is returned:  the string `"Tenley"`.  As with the name attribute, we're also able to get the value of the breed and age attributes—and would be able to get the value of any other column in the database.
 
-In addition to getter methods, we also get setter methods.  Given an instance of `Dog`, we can *set* the value of any of its attributes.  In this case, we're changing the age of our dog to 2.  And after setting the new age, when we again get the age, we see that Tenley's age is now 2.
+In addition to getter methods, we are also provided with setter methods.  Given an instance of `Dog`, we can *set* the value of any of its attributes.  In this case, we're changing the age of our dog to 2.  And after setting the new age, when we again get the age, we see that Tenley's age is now 2.
 
 
 ### Release 2: Persisting Attribute Changes
@@ -142,7 +142,7 @@ tenley.license
 ```
 *Figure 9* Simultaneously updating a dog's age and license.
 
-Sometimes we wan't to update multiple attributes at the same time.  If we wanted, we could use an object's individual setter methods one at a time.  However, Active Record provides methods for updating multiple attributes at one time (see Figure 9).
+Sometimes we wan't to update multiple attributes at the same time.  If we wanted, we could use an object's individual setter methods one at a time.  However, Active Record provides methods for updating multiple attributes at once (see Figure 9).
 
 `#assign_attributes` and `#update_attributes` both allow us to update the values of multiple attributes at one time.  Can we guess the difference between them?  One of the methods persists changes to the database while the other only updates the attributes of the in-memory Ruby object.  Which one is which?
 
